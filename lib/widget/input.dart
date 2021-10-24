@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 
 class Input extends StatelessWidget {
   const Input({
-    Key key,
-    @required this.etInput,
+    Key? key,
+    required this.etInput,
   }) : super(key: key);
 
   final TextEditingController etInput;
@@ -12,10 +12,20 @@ class Input extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      decoration: InputDecoration(hintText: "Enter Temperature in Celcius"),
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       controller: etInput,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Silahkan masukkan suhu dalam celcius';
+        }
+        return null;
+      },
+      decoration: const InputDecoration(
+        hintText: 'Masukkan Suhu Dalam Celcius',
+      ),
       keyboardType: TextInputType.number,
+      inputFormatters: <TextInputFormatter>[
+        FilteringTextInputFormatter.digitsOnly
+      ],
     );
   }
 }

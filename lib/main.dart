@@ -1,70 +1,84 @@
-import 'package:flutter_statefull/widget/convert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statefull/widget/input.dart';
 import 'package:flutter_statefull/widget/result.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   // text controller
-  TextEditingController etInput = new TextEditingController();
+  TextEditingController etInput = TextEditingController();
   //variabel berubah
   double _inputUser = 0;
   double _kelvin = 0;
+  double _fahrenheit = 0;
   double _reamur = 0;
+  final _formKey = GlobalKey<FormState>();
 
-  _conversionTemperature() {
+  _konversiSuhu() {
     setState(() {
-      _inputUser = double.parse(etInput.text);
-      _reamur = 4 / 5 * _inputUser;
-      _kelvin = _inputUser + 273;
+      if (_formKey.currentState!.validate()) {
+        _inputUser = double.parse(etInput.text);
+        _reamur = 4 / 5 * _inputUser;
+        _fahrenheit = 9 / 5 * _inputUser + 32;
+        _kelvin = _inputUser + 273;
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Converter',
+      title: 'Konversi Suhu',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Temperature Converter"),
+          title: const Text("Konverter Suhu"),
         ),
         body: Container(
-          margin: EdgeInsets.all(8),
+          margin: const EdgeInsets.all(8),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Input(etInput: etInput),
-              Container(
-                margin: EdgeInsets.only(top: 20, bottom: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Result(
-                      result: _kelvin,
-                      name: "Kelvin",
-                    ),
-                    Result(
-                      result: _reamur,
-                      name: "Reamur",
-                    ),
-                  ],
-                ),
+            children: <Widget>[
+              Form(
+                key: _formKey,
+                child: Input(etInput: etInput),
               ),
-              Convert(convertHandler: _conversionTemperature),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Result(
+                    result: _kelvin,
+                    name: "Suhu Kelvin",
+                  ),
+                  Result(
+                    result: _fahrenheit,
+                    name: "Suhu Fahrenheit",
+                  ),
+                  Result(
+                    result: _reamur,
+                    name: "Suhu Reamur",
+                  ),
+                ],
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(double.infinity, 50),
+                ),
+                onPressed: _konversiSuhu,
+                child: const Text('Konversi Suhu'),
+              ),
             ],
           ),
         ),
