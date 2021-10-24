@@ -14,7 +14,7 @@ class Convert extends StatelessWidget {
         onPressed: convertHandler,
         color: Colors.blueAccent,
         textColor: Colors.white,
-        child: Text("Converte Temperature"),
+        child: Text("Converter Temperature"),
       ),
     );
   }
