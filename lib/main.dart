@@ -1,7 +1,7 @@
-import 'package:converter/widget/convert.dart';
+import 'package:flutter_statefull/widget/convert.dart';
 import 'package:flutter/material.dart';
-import 'package:converter/widget/input.dart';
-import 'package:converter/widget/result.dart';
+import 'package:flutter_statefull/widget/input.dart';
+import 'package:flutter_statefull/widget/result.dart';
 
 void main() {
   runApp(MyApp());
