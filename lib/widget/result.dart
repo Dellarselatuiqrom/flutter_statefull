@@ -12,7 +12,6 @@ class Result extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      // ignore: prefer_const_literals_to_create_immutables
       children: [
         Container(
           margin: const EdgeInsets.only(left: 10),

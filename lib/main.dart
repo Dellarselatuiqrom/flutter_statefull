@@ -14,9 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // text controller
   TextEditingController etInput = TextEditingController();
-  //variabel berubah
   double _inputUser = 0;
   double _kelvin = 0;
   double _fahrenheit = 0;
