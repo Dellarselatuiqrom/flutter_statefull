@@ -1,35 +1,31 @@
 import 'package:flutter/material.dart';
 
 class Result extends StatelessWidget {
-  const Result({Key? key, required double result, required String name})
-      : _suhu = result,
+  const Result({Key key, @required double result, @required String name})
+      : _result = result,
         _name = name,
         super(key: key);
 
-  final double _suhu;
+  final double _result;
   final String _name;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: const EdgeInsets.only(left: 10),
-          padding: const EdgeInsets.fromLTRB(5, 30, 5, 30),
-          decoration: BoxDecoration(border: Border.all(color: Colors.orange)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(_name),
-              const Padding(padding: EdgeInsets.only(bottom: 20)),
-              Text(
-                _suhu.toStringAsFixed(2),
-                style: const TextStyle(fontSize: 36),
-              )
-            ],
+    return Expanded(
+      child: Column(
+        children: [
+          Text(_name),
+          Container(
+            margin: EdgeInsets.only(top: 20, bottom: 20),
+            child: Expanded(
+              child: Text(
+                _result.toStringAsFixed(2),
+                style: TextStyle(fontSize: 36),
+              ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
